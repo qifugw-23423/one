@@ -11,12 +11,10 @@
         // 调用接口并获取重定向 URL
         fetch(`https://code.server.wangyinjie.cn/one-skip/${id}`, {
             method: 'GET',
-            redirect: 'follow' // 自动跟随重定向
-        }).then(response => {
-            console.log('重定向 URL:', response);
-            if (response.url) {
-                window.location.href = response.url; // 跳转到重定向地址
-            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = data.url; // 跳转到重定向地址
         }).catch(error => {
             console.error('请求失败:', error);
         });
